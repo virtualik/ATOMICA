@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTAURI Demonstration | ATOMICA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Подключаем CSS из папки templates (OpenFL скопирует его) -->
+    <link rel="stylesheet" href="./css/main.css">
+
+    <!-- 
+    ==============================================================================
+    @document ALTAURI COM Port Demo (OpenFL Template)
+    @version  1.0.1
+    @description
+        Шаблон для сборки HTML5 версии ALTAURI.
+        OpenFL переименует этот файл в demo.html при сборке.
+        ALTAURI и ALTAURI будут заменены автоматически.
+    ==============================================================================
+    @changelog
+    [2026-08-11] v1.0.1 - Брендинг и абстракция
+        * Удалены упоминания Haxe/OpenFL из видимой части
+        * Переименован контейнер в 'interactive-runtime'
+    [2026-08-11] v1.0.0 - Initial commit
+    @data_flow
+        [OpenFL Build] -> [template index.html] -> [rename to demo.html] -> [bin/html5/bin/demo.html]
+    ==============================================================================
+    -->
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">ATOM<span>ICA</span> <span style="font-size: 0.9rem; font-weight: 400; color: var(--color-text-secondary); margin-left: 10px;">/ Demo Environment</span></a>
+            <nav>
+                <a href="index.html" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">← Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: 40px; padding-bottom: 40px;">
+        
+        <div class="demo-section">
+            <h2 class="demo-title">Demo: COM Port Control via Web Interface</h2>
+            
+            <p class="demo-description">
+                This interactive demonstration showcases how the <strong>ALTAURI</strong> system provides direct, low-latency access to a computer's hardware resources through a standard web browser.
+            </p>
+            <p class="demo-description">
+                You are looking at a virtual control panel for a COM port—a standard serial communication interface. Despite operating entirely within a browser sandbox, ALTAURI grants you full, real-time, deterministic control over the physical hardware of your workstation. Furthermore, leveraging modern standards like the Web Serial API, this web-based COM port functionality extends seamlessly to <strong>Android platforms</strong>, enabling powerful mobile hardware integration.
+            </p>
+        </div>
+
+        <!-- OpenFL внедрит сюда canvas -->
+        <div id="interactive-runtime"></div>
+
+        <div class="demo-section">
+            <div class="altauri-block">
+                <h3>The ALTAURI Architecture</h3>
+                <p>
+                    ALTAURI bridges the gap between modern web applications and system-level software. It utilizes a centralized, high-performance Event Bus for seamless communication between UI components and specialized WebAPI drivers that interact directly with the hardware, ensuring robust data exchange without compromising security or execution speed.
+                </p>
+            </div>
+
+            <div class="how-it-works-block">
+                <h3 style="margin-top: 0;">Operational Mechanics</h3>
+                <ul>
+                    <li>
+                        <strong>Port Management</strong>
+                        Open, configure, and close the COM port directly from the browser interface.
+                    </li>
+                    <li>
+                        <strong>Real-time Monitoring</strong>
+                        Track connection status, baud rates, and data flow with zero observable latency.
+                    </li>
+                    <li>
+                        <strong>Bi-directional Transmission</strong>
+                        Send and receive binary or text information through the serial channel reliably.
+                    </li>
+                    <li>
+                        <strong>Advanced Data Routing</strong>
+                        Seamlessly bridge serial data with other endpoints. Route incoming COM port streams directly to local files or WebSockets.
+                    </li>
+                    <li>
+                        <strong>Visual Telemetry</strong>
+                        Observe the live data exchange process in an integrated, scrollable text console.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- OpenFL автоматически подставит имя файла вместо ALTAURI -->
+    <script src="ALTAURI.js"></script>
+
+    <script>
+    window.addEventListener('load', function() {
+        if (typeof lime !== 'undefined' && typeof lime.embed === 'function') {
+            lime.embed("ALTAURI", "interactive-runtime", 0, 0);
+        }
+    });
+    </script>
+
+</body>
+</html>
