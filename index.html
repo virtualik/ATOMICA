@@ -36,31 +36,147 @@
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="section">
-            <div class="container">
-                <h2 class="section-title">Empowering digital behavior</h2>
-                <p class="section-subtitle">Build, teach, and experiment with ease using our core technologies.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>Visual Behavior Design</h3>
-                        <p style="color: var(--color-text-secondary);">Create complex systems visually without writing a single line of boilerplate code.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Immutable Reactive Architecture</h3>
-                        <p style="color: var(--color-text-secondary);">Build reliable and responsive systems effortlessly with predictable state management.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>AtomICScript</h3>
-                        <p style="color: var(--color-text-secondary);">Simplify logic design with our declarative scripting language tailored for behavior modeling.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>AtomVM Engine</h3>
-                        <p style="color: var(--color-text-secondary);">Execute complex applications seamlessly with our high-performance virtual machine.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+		<!-- ============================================================================
+			 SECTION: WORKFLOW (Build with atoms)
+			 Описание: 4 шага от идеи к работающей распределённой системе
+			 ============================================================================ -->
+		<section class="section workflow-section" id="workflow">
+			<div class="container">
+				<h2 class="section-title">Программа не пишется. Она собирается.</h2>
+				<p class="section-subtitle">Мы вернули программированию его физическую суть. От идеи до работающего графа за 4 шага.</p>
+				
+				<div class="workflow-grid">
+					<div class="workflow-step" data-animate="fade-up">
+						<div class="step-number">01</div>
+						<h3>Откройте среду</h3>
+						<p>Запустите ALTAURI в браузере или на локальном устройстве. Никаких сложных IDE и настроек окружения.</p>
+					</div>
+					<div class="workflow-step" data-animate="fade-up" data-delay="100">
+						<div class="step-number">02</div>
+						<h3>Добавьте Атомы</h3>
+						<p>Выберите функциональные блоки из библиотеки: датчики, логика, сетевые протоколы или UI-элементы.</p>
+					</div>
+					<div class="workflow-step" data-animate="fade-up" data-delay="200">
+						<div class="step-number">03</div>
+						<h3>Соедините связи</h3>
+						<p>Создайте типобезопасные каналы передачи данных. Система валидирует совместимость портов на лету.</p>
+					</div>
+					<div class="workflow-step" data-animate="fade-up" data-delay="300">
+						<div class="step-number">04</div>
+						<h3>Нажмите [Run]</h3>
+						<p>Граф компилируется в высокопроизводительный код и разворачивается от Edge-устройства до облака.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- ============================================================================
+			 ASCII-DIAGRAM: Distributed Graph Topology
+			 Сохранено в соответствии с правилами документирования визуальных схем.
+			 
+			 ┌──────────────┐          WebSocket           ┌─────────────────────────┐
+			 │   ALTAURI    │<---------------------------> │   ALTAURI               │
+			 │  (Edge/RPI)  │          Atom-Atom           │    (Cloud/Server)       │
+			 │              │           protocol           │                         │
+			 │   [Sensor]───┼──►[WebSocket Out]            │  [WebSocket In]──►[DB]  │
+			 │              │                              │                         │
+			 │   [Button]───┼──►[WebSocket Out]────────────┼─►[WebSocket In]──►[LED] │
+			 └──────────────┘                              └─────────────────────────┘
+			 ============================================================================ -->
+		<section class="section distributed-section" id="distributed">
+			<div class="container">
+				<div class="split-layout">
+					<div class="split-content" data-animate="fade-right">
+						<h2 class="section-title">Прозрачная распределённость</h2>
+						<p class="lead-text">Главная иллюзия современного программирования — что код живёт на одном устройстве. ALTAURI разрушает эту иллюзию на уровне парадигмы.</p>
+						<ul class="feature-list">
+							<li><strong>Атом не имеет «места жительства».</strong> Среда исполнения сама решает, где разместить узел: в локальной памяти, на соседнем ядре CPU или в облачном кластере.</li>
+							<li><strong>Транзакционные каналы.</strong> Связи между Атомами гарантируют доставку данных вне зависимости от того, проходит ли сигнал через шину PCIe или через океан по WebSocket.</li>
+							<li><strong>Атомарная реконфигурация.</strong> Изменение графа в рантайме происходит как транзакция (ACID), исключая гонки данных (race conditions) на уровне топологии.</li>
+						</ul>
+					</div>
+					<div class="split-visual" data-animate="fade-left">
+						<!-- Визуализация ASCII-диаграммы в стилизованном блоке -->
+						<pre class="ascii-art-block">
+		┌──────────────┐          WebSocket           ┌─────────────────────────┐
+		│   ALTAURI    │<---------------------------> │   ALTAURI               │
+		│  (Edge/RPI)  │          Atom-Atom           │    (Cloud/Server)       │
+		│              │           protocol           │                         │
+		│   [Sensor]───┼──►[WebSocket Out]            │  [WebSocket In]──►[DB]  │
+		│              │                              │                         │
+		│   [Button]───┼──►[WebSocket Out]────────────┼─►[WebSocket In]──►[LED] │
+		└──────────────┘                              └─────────────────────────┘
+						</pre>
+						<p class="caption">Единый граф, растянутый на всю вычислительную ткань: от микроконтроллера до облака.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section audience-section" id="audience">
+			<div class="container">
+				<h2 class="section-title">Единая среда для любых масштабов</h2>
+				<p class="section-subtitle">Один граф работает от Arduino до Kubernetes. Возраст и знание синтаксиса перестают быть фильтром.</p>
+				
+				<div class="audience-grid">
+					<div class="audience-card" data-animate="fade-up">
+						<div class="icon">⚙️</div>
+						<h3>Для инженеров</h3>
+						<p>Деплой Edge AI и промышленных потоков данных за 5 кликов. Собранный граф является единственным источником истины (SSOT) и разворачивается без переписывания на C++ или Python.</p>
+					</div>
+					<div class="audience-card" data-animate="fade-up" data-delay="100">
+						<div class="icon">💡</div>
+						<h3>Для изобретателей и новичков</h3>
+						<p>Инструмент, где мысль становится ближе к реализации. Музыкант, учитель или исследователь создают логику, не отвлекаясь на синтаксический шум и ошибки компиляции.</p>
+					</div>
+					<div class="audience-card" data-animate="fade-up" data-delay="200">
+						<div class="icon">🎓</div>
+						<h3>Для образования</h3>
+						<p>Идеальная среда для обучения вычислительному мышлению от 6 до 90 лет. Визуальная валидация типов и трассировка данных в реальном времени делают обучение интуитивным.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="section pricing-section" id="pricing">
+			<div class="container">
+				<h2 class="section-title">Гибкие пакеты для любых задач</h2>
+				<div class="pricing-grid">
+					<div class="pricing-card" data-animate="fade-up">
+						<h3>Personal</h3>
+						<div class="price">Бесплатно</div>
+						<ul class="pricing-features">
+							<li>Браузерный редактор</li>
+							<li>Локальный Runtime</li>
+							<li>Базовая библиотека Атомов</li>
+							<li>Сохранение проектов в облаке</li>
+						</ul>
+						<a href="demo.html" class="btn btn-outline">Попробовать Demo</a>
+					</div>
+					<div class="pricing-card featured" data-animate="fade-up" data-delay="100">
+						<div class="badge">Рекомендуем</div>
+						<h3>Team</h3>
+						<div class="price">$20<span>/мес</span></div>
+						<ul class="pricing-features">
+							<li>Всё из Personal</li>
+							<li>Облачный Runtime (ALTAURI Cloud)</li>
+							<li>Совместное редактирование графов</li>
+							<li>Приоритетная поддержка</li>
+						</ul>
+						<a href="#contact" class="btn">Начать работу</a>
+					</div>
+					<div class="pricing-card" data-animate="fade-up" data-delay="200">
+						<h3>Enterprise</h3>
+						<div class="price">$200<span>/мес</span></div>
+						<ul class="pricing-features">
+							<li>Всё из Team</li>
+							<li>White-label встраивание Runtime</li>
+							<li>Выделенные кластеры</li>
+							<li>SLA и персональный менеджер</li>
+						</ul>
+						<a href="#contact" class="btn btn-outline">Связаться с нами</a>
+					</div>
+				</div>
+			</div>
+		</section>						
 
         <!-- CTA Section -->
         <section class="section" style="background-color: var(--color-accent-light); text-align: center;">

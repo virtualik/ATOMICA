@@ -298,3 +298,97 @@ body:has(canvas:fullscreen) {
     .how-it-works-block ul { grid-template-columns: 1fr; }
     #interactive-runtime { height: 400px; }
 }
+/* ============================================================================
+   WORKFLOW & ANIMATIONS
+   ============================================================================ */
+.workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.workflow-step {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.workflow-step:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.step-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-accent-light);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+}
+
+/* ============================================================================
+   DISTRIBUTED SECTION & ASCII ART
+   ============================================================================ */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ascii-art-block {
+    background: #0f172a;
+    color: #4ade80; /* Terminal green */
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    overflow-x: auto;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid #1e293b;
+}
+
+.caption {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* ============================================================================
+   SCROLL ANIMATIONS (Intersection Observer)
+   ============================================================================ */
+[data-animate] {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-animate="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-animate="fade-right"] {
+    transform: translateX(-30px);
+}
+
+[data-animate="fade-left"] {
+    transform: translateX(30px);
+}
+
+[data-animate].is-visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
