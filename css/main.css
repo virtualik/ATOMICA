@@ -1,10 +1,10 @@
 /* ============================================================================
    ATOMICA Design System
-   Version: 1.1.3
+   Version: 1.1.4
    Changelog:
-   [2026-08-11] v1.1.3 - Добавлена безопасная, одноразовая анимация появления 
-                         для #interactive-runtime (элегантное раскрытие без resize loop)
-   [2026-08-11] v1.1.2 - Исправлен бесконечный resize loop (убраны transition с canvas)
+   [2026-08-11] v1.1.4 - Добавлена анимация "гармошка" (vertical reveal) для #interactive-runtime
+   [2026-08-11] v1.1.3 - Безопасная анимация появления (scale + opacity)
+   [2026-08-11] v1.1.2 - Исправлен бесконечный resize loop
    [2026-08-11] v1.1.0 - Added workflow, distributed, audience, pricing sections
    [2026-08-11] v1.0.0 - Initial design system
    ============================================================================ */
@@ -612,17 +612,18 @@ body {
 }
 
 /* 
-  КРАСИВАЯ И БЕЗОПАСНАЯ АНИМАЦИЯ ПОЯВЛЕНИЯ 
-  Анимируем только обёртку, чтобы не сбивать внутренние размеры OpenFL canvas.
+  АНИМАЦИЯ "ГАРМОШКА" (Vertical Reveal)
+  Раскрытие сверху вниз через scaleY + opacity.
+  Работает на GPU, не вызывает reflow, безопасно для OpenFL canvas.
 */
-@keyframes elegantReveal {
+@keyframes accordionReveal {
     0% {
         opacity: 0;
-        transform: scale(0.96) translateY(15px);
+        transform: scaleY(0);
     }
     100% {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scaleY(1);
     }
 }
 
@@ -637,11 +638,14 @@ body {
     position: relative;
     box-shadow: var(--shadow-lg);
     
-    /* Одноразовая плавная анимация появления (0.8 секунды, премиальная кривая скорости) */
-    animation: elegantReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* Точка трансформации — верхний край (раскрытие сверху вниз) */
+    transform-origin: top center;
+    
+    /* Одноразовая анимация "гармошка" (0.7 секунды, плавная кривая) */
+    animation: accordionReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Canvas внутри не должен иметь своих transition, чтобы не вызывать resize loop */
+/* Canvas внутри не должен иметь своих transition */
 #interactive-runtime canvas {
     display: block;
     width: 100% !important;
