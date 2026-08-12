@@ -236,27 +236,27 @@
             <!-- Demo Item 1 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="1">
-                    <span class="accordion-title">Module 1: Primary COM Port Control</span>
+                    <span class="accordion-title">Module 1: Signal Routing</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Direct, low-latency access to standard serial communication interfaces with real-time telemetry.</p>
-                        <div id="demo-runtime-1" class="runtime-container" data-initialized="false"></div>
-                    </div>
+                        <p class="demo-description">Direct controll with visual feedback controll elements.</p>
+                        <div id="demo-runtime-1" class="runtime-container" data-initialized="false" data-blueprint="blueprints/ButtonAndLED.atom"></div>
+					</div>
                 </div>
             </div>
 
             <!-- Demo Item 2 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="2">
-                    <span class="accordion-title">Module 2: Advanced Data Routing</span>
+                    <span class="accordion-title">Module 2: Primary COM Port Control</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Seamlessly bridge serial data streams to local files or WebSocket endpoints in real-time.</p>
-                        <div id="demo-runtime-2" class="runtime-container" data-initialized="false"></div>
+                        <p class="demo-description">Direct, low-latency access to standard serial communication interfaces with real-time telemetry.</p>
+                        <div id="demo-runtime-2" class="runtime-container" data-initialized="false" data-blueprint="blueprints/SerialTerminal.atom"></div>
                     </div>
                 </div>
             </div>
@@ -264,18 +264,18 @@
             <!-- Demo Item 3 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="3">
-                    <span class="accordion-title">Module 3: Multi-Device Synchronization</span>
+                    <span class="accordion-title">Module 3: Multi-Device Signal routing</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Demonstration of distributed graph execution across multiple simulated hardware endpoints.</p>
-                        <div id="demo-runtime-3" class="runtime-container" data-initialized="false"></div>
+                        <p class="demo-description">Demonstration of switch controll</p>
+                        <div id="demo-runtime-3" class="runtime-container" data-initialized="false" data-blueprint="blueprints/ToggleSwitch.atom"></div>
                     </div>
                 </div>
             </div>
 
-        </div>
+		</div>
 
         <div class="demo-section" style="margin-top: 3rem;">
             <div class="altauri-block">
