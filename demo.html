@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="./css/main.css">
 
     <style>
-    /* ============================================================================
-       ACCORDION STYLES (comportdemo.html)
-       Flex-based animated accordion: active item expands, others compress.
-       ============================================================================ */
 
     .accordion-container {
         display: flex;
@@ -73,8 +69,15 @@
         color: var(--color-text-primary, #0f172a);
         gap: 1rem;
         transition: color 0.3s ease;
+        
+        /* КРИТИЧНО: отступ для scrollIntoView, чтобы заголовок не прятался под sticky header */
+        scroll-margin-top: 141px;
     }
-
+	
+	/* Переопределяем отступ только для первого элемента */
+	.accordion-item:first-child .accordion-header {
+		scroll-margin-top: 77px; /* Ставим поменьше, чтобы подъезжало выше */
+	}
     .accordion-header:hover {
         color: var(--color-accent, #4f46e5);
     }
@@ -285,8 +288,7 @@
 
     </main>
 
-    <!-- автоматически подставляем имя файла вместо ALTAURI -->
-    <script src="ALTAURI.js"></script>
+    <script src="ALTAURI_Web.js"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -309,7 +311,17 @@
                     item.classList.add('is-active');
                     header.setAttribute('aria-expanded', 'true');
 
-                    // 3. Lazy-load OpenFL runtime on first open
+                    // 3. Прокрутка к заголовку ПОСЛЕ анимации раскрытия/закрытия
+                    // Если запустить мгновенно, браузер посчитает позицию до того, 
+                    // как верхние элементы сожмутся, и прокрутит криво.
+                    setTimeout(function() {
+                        header.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 550); // 550 мс — время твоей CSS-анимации flex
+
+                    // 4. Lazy-load OpenFL runtime on first open
                     const runtimeContainer = item.querySelector('.runtime-container');
                     const demoId = header.getAttribute('data-demo-id');
 
@@ -329,7 +341,7 @@
                             const targetWidth = runtimeContainer.clientWidth;
                             const targetHeight = runtimeContainer.clientHeight;
                             
-                            lime.embed('ALTAURI', 'demo-runtime-' + demoId, targetWidth, targetHeight);
+                            lime.embed('ALTAURI_Web', 'demo-runtime-' + demoId, targetWidth, targetHeight);
                             
                             // Полный перехват событий мыши для canvas
                             const canvas = runtimeContainer.querySelector('canvas');
