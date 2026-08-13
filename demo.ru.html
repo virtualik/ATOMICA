@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALTAURI Demonstration | ATOMICA</title>
+    <title>Демонстрация ALTAURI | ATOMICA</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -179,7 +179,7 @@
 
     /* placeholder shown before runtime loads */
     .runtime-container[data-initialized="false"]::after {
-        content: 'Runtime will initialize on first open';
+        content: 'Среда выполнения инициализируется при первом открытии';
         position: absolute;
         inset: 0;
         display: flex;
@@ -213,17 +213,17 @@
 
     <header class="header">
         <div class="container header-container">
-            <a href="index.html" class="logo">ATOM<span>ICA</span> <span style="font-size: 0.9rem; font-weight: 400; color: var(--color-text-secondary); margin-left: 10px;">/ Demo Environment</span></a>
-            <nav class="language-switcher" aria-label="Language selection">
+            <a href="index.ru.html" class="logo">ATOM<span>ICA</span> <span style="font-size: 0.9rem; font-weight: 400; color: var(--color-text-secondary); margin-left: 10px;">/ Демонстрационная среда</span></a>
+            <nav class="language-switcher" aria-label="Выбор языка">
                 <ul class="language-list">
                     <li class="language-item">
                         <a href="demo.zh.html" hreflang="zh-CN" lang="zh-CN" class="language-link" title="中文">中文</a>
                     </li>
                     <li class="language-item">
-                        <a href="demo.ru.html" hreflang="ru" lang="ru" class="language-link" title="Русский">РУ</a>
+                        <a href="demo.ru.html" hreflang="ru" lang="ru" class="language-link active" title="Русский">РУ</a>
                     </li>
                     <li class="language-item">
-                        <a href="demo.html" hreflang="en" lang="en" class="language-link active" title="English">EN</a>
+                        <a href="demo.html" hreflang="en" lang="en" class="language-link" title="English">EN</a>
                     </li>
                 </ul>
             </nav>
@@ -233,11 +233,12 @@
     <main class="container" style="padding-top: 40px; padding-bottom: 40px;">
         
         <div class="demo-section">
-			<a href="index.html" class="back-link">← Go back to Main</a>
-            <h2 class="demo-title">Interactive Demonstrations</h2>
+            <a href="index.ru.html" class="back-link">← На главную</a>
+            <h2 class="demo-title">Интерактивные демонстрации</h2>
             <p class="demo-description">
-                Explore the capabilities of the <strong>ALTAURI</strong> system through isolated, real-time hardware interaction scenarios. 
-                Select a module below to initialize its dedicated runtime environment.
+                Исследуйте возможности системы ALTAURI через изолированные сценарии 
+                взаимодействия с оборудованием в реальном времени. Выберите модуль ниже, 
+                чтобы инициализировать его специализированную среду выполнения.
             </p>
         </div>
 
@@ -247,12 +248,12 @@
             <!-- Demo Item 1 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="1">
-                    <span class="accordion-title">Module 1: Signal Routing</span>
+                    <span class="accordion-title">Модуль 1: Маршрутизация сигналов</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Direct controll with visual feedback controll elements.</p>
+                        <p class="demo-description">Прямое управление с визуальной обратной связью элементов управления.</p>
                         <div id="demo-runtime-1" class="runtime-container" data-initialized="false" data-blueprint="blueprints/ButtonAndLED.atom"></div>
                     </div>
                 </div>
@@ -261,12 +262,12 @@
             <!-- Demo Item 2 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="2">
-                    <span class="accordion-title">Module 2: Primary COM Port Control</span>
+                    <span class="accordion-title">Модуль 2: Управление основным COM-портом</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Direct, low-latency access to standard serial communication interfaces with real-time telemetry.</p>
+                        <p class="demo-description">Прямой, низколатентный доступ к стандартным интерфейсам последовательной связи с телеметрией в реальном времени.</p>
                         <div id="demo-runtime-2" class="runtime-container" data-initialized="false" data-blueprint="blueprints/SerialTerminal.atom"></div>
                     </div>
                 </div>
@@ -275,12 +276,12 @@
             <!-- Demo Item 3 -->
             <div class="accordion-item">
                 <button class="accordion-header" aria-expanded="false" data-demo-id="3">
-                    <span class="accordion-title">Module 3: Multi-Device Signal routing</span>
+                    <span class="accordion-title">Модуль 3: Маршрутизация сигналов между устройствами</span>
                     <span class="accordion-icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <div class="accordion-inner">
-                        <p class="demo-description">Demonstration of switch controll</p>
+                        <p class="demo-description">Демонстрация управления переключателем</p>
                         <div id="demo-runtime-3" class="runtime-container" data-initialized="false" data-blueprint="blueprints/ToggleSwitch.atom"></div>
                     </div>
                 </div>
@@ -290,27 +291,26 @@
 
         <div class="demo-section" style="margin-top: 3rem;">
             <div class="altauri-block">
-                <h3>The ALTAURI Architecture</h3>
-                <p>
-                    ALTAURI bridges the gap between modern web applications and system-level software. It utilizes a centralized, high-performance Event Bus for seamless communication between UI components and specialized WebAPI drivers that interact directly with the hardware, ensuring robust data exchange without compromising security or execution speed.
-                </p>
+                <h3>Архитектура ALTAURI</h3>
+                <p>ALTAURI преодолевает разрыв между современными веб-приложениями и системным программным обеспечением. Она использует централизованную, высокопроизводительную шину событий (Event Bus) для бесшовной коммуникации между UI-компонентами и специализированными WebAPI-драйверами, которые взаимодействуют напрямую с оборудованием, обеспечивая надежный обмен данными без компромиссов в отношении безопасности или скорости выполнения.</p>
             </div>
         </div>
 
     </main>
-	
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p class="footer-text">
-                The system is under active development. Some inconsistencies may be present. 
-                Your suggestions and feedback are very important for improving the product. 
-                Please take a few minutes of your valuable time and write to us at: 
+                Система находится в активной разработке. Некоторые несоответствия могут присутствовать. 
+                Ваши пожелания и замечания будут очень важны для улучшения продукта. 
+                Уделите пожалуйста несколько минут вашего драгоценного времени и напишите нам их по этому адресу: 
                 <a href="mailto:altauri.impulsys@gmail.com">altauri.impulsys@gmail.com</a>
             </p>
             <p class="footer-copyright">© 2025--2026 ATOMICA. Built with ALTAURI Architecture.</p>
         </div>
     </footer>
+
     <script src="ALTAURI_Web.js"></script>
 
     <script>
@@ -335,14 +335,12 @@
                     header.setAttribute('aria-expanded', 'true');
 
                     // 3. Прокрутка к заголовку ПОСЛЕ анимации раскрытия/закрытия
-                    // Если запустить мгновенно, браузер посчитает позицию до того, 
-                    // как верхние элементы сожмутся, и прокрутит криво.
                     setTimeout(function() {
                         header.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
-                    }, 550); // 550 мс — время твоей CSS-анимации flex
+                    }, 550); 
 
                     // 4. Lazy-load OpenFL runtime on first open
                     const runtimeContainer = item.querySelector('.runtime-container');
@@ -355,28 +353,21 @@
                     ) {
                         runtimeContainer.setAttribute('data-pending', 'true');
                         
-                        // Ждём 600мс, чтобы CSS-анимация flex-grow (0.55s) полностью завершилась
-                        // и у контейнера появились корректные clientWidth / clientHeight
                         setTimeout(function () {
                             console.log('[ALTAURI] Initializing Runtime for Demo ' + demoId + '...');
                             
-                            // Динамический размер
                             const targetWidth = runtimeContainer.clientWidth;
                             const targetHeight = runtimeContainer.clientHeight;
                             
                             lime.embed('ALTAURI_Web', 'demo-runtime-' + demoId, targetWidth, targetHeight);
                             
-                            // Полный перехват событий мыши для canvas
                             const canvas = runtimeContainer.querySelector('canvas');
                             if (canvas) {
-                                // 2.1. Блокируем прокрутку страницы при вращении колёсика над canvas
                                 canvas.addEventListener('wheel', function(e) {
                                     e.preventDefault();
                                     e.stopPropagation();
                                 }, { passive: false });
 
-                                // 2.2. Блокируем нажатие на колёсико (средняя кнопка мыши, button === 1), 
-                                // чтобы браузер не активировал режим автопрокрутки (autoscroll)
                                 canvas.addEventListener('mousedown', function(e) {
                                     if (e.button === 1) {
                                         e.preventDefault();
@@ -384,7 +375,6 @@
                                     }
                                 }, { passive: false });
                                 
-                                // 2.3. Дублируем для auxclick (современный стандарт для не-левых кликов)
                                 canvas.addEventListener('auxclick', function(e) {
                                     if (e.button === 1) {
                                         e.preventDefault();

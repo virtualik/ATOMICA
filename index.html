@@ -56,30 +56,6 @@
         .contrast-card p {
             color: #cbd5e1;
         }
-
-        /* Стили для переключателя языка */
-        .lang-switch {
-            font-weight: 700;
-            color: var(--color-accent);
-            text-decoration: none;
-            padding: 0.4rem 0.8rem;
-            border: 2px solid var(--color-border);
-            border-radius: var(--radius-md);
-            transition: all 0.3s;
-        }
-        .lang-switch:hover {
-            border-color: var(--color-accent);
-            background: var(--color-accent-light);
-        }
-        @media (max-width: 768px) {
-            .lang-switch {
-                position: absolute;
-                right: 4.5rem; /* Отступ, чтобы не накладывался на гамбургер */
-                top: 1.4rem;
-                padding: 0.2rem 0.5rem;
-                font-size: 0.9rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -93,10 +69,19 @@
                 <a href="#distributed" class="nav-link">Distributed</a>
                 <a href="#audience" class="nav-link">For Whom</a>
             </nav>
-            <div class="lang-group">
-                <a href="index.ru.html" class="lang-switch">RU</a>
-                <a href="index.zh.html" class="lang-switch">ZH</a>
-            </div>
+            <nav class="language-switcher" aria-label="Language selection">
+              <ul class="language-list">
+                <li class="language-item">
+                  <a href="index.zh.html" hreflang="zh-CN" lang="zh-CN" class="language-link" title="中文">中文</a>
+                </li>
+                <li class="language-item">
+                  <a href="index.ru.html" hreflang="ru" lang="ru" class="language-link" title="Русский">РУ</a>
+                </li>
+                <li class="language-item">
+                  <a href="index.html" hreflang="en" lang="en" class="language-link active" title="English">EN</a>
+                </li>
+              </ul>
+            </nav>
             <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -313,6 +298,16 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+			<p class="footer-text" style="margin-top: 1.5rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+				ALTAURI is a unique computing environment with no direct architectural analogs on the market. 
+				We are open to collaboration and invite like-minded individuals to join the project's development. 
+				We welcome any form of support: sharing ideas, contributing to development, or investment partnership.
+				<br><br>
+				If you are interested in custom system integration (including White-label solutions), 
+				building proprietary products, or strategic acquisition of the platform, please contact us: 
+				<a href="mailto:altauri.impulsys@gmail.com">altauri.impulsys@gmail.com</a>
+			</p>
+			
             <p>&copy; 2025--2026 <b>ATOMICA</b>. Built with <b>ALTAURI</b> Architecture. Contact <b>altauri.impulsys@gmail.com</b></p>
         </div>
     </footer>

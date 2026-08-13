@@ -93,15 +93,19 @@
                 <a href="#distributed" class="nav-link">Распределённость</a>
                 <a href="#audience" class="nav-link">Для кого</a>
             </nav>
-            <div class="lang-group">
-                <a href="index.html" class="lang-switch">EN</a>
-                <a href="index.zh.html" class="lang-switch">ZH</a>
-            </div>
-            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+			<nav class="language-switcher" aria-label="Выбор языка">
+			  <ul class="language-list">
+				<li class="language-item">
+				  <a href="index.zh.html" hreflang="zh-CN" lang="zh-CN" class="language-link" title="中文">中文</a>
+				</li>
+				<li class="language-item">
+				  <a href="index.ru.html" hreflang="ru" lang="ru" class="language-link active" title="Русский">РУ</a>
+				</li>
+				<li class="language-item">
+				  <a href="index.html" hreflang="en" lang="en" class="language-link" title="English">EN</a>
+				</li>
+			  </ul>
+			</nav>
         </div>
     </header>
 
@@ -113,7 +117,7 @@
                 Десятилетиями мостом между идеей и кодом был текст. Синтаксис. Скобки. Отладка. Для инженера это рутина. Для творца — стена. Мы возвращаем программированию его физическую суть.
             </p>
             <div class="hero-buttons" data-animate="fade-up" data-delay="200">
-                <a href="demo.html" class="btn btn-primary">Интерактивное демо</a>
+                <a href="demo.ru.html" class="btn btn-primary">Интерактивное демо</a>
                 <a href="#manifesto" class="btn btn-outline">Узнать больше</a>
             </div>
         </div>
@@ -306,16 +310,26 @@
             <p class="cta-subtitle" data-animate="fade-up" data-delay="100">
                 Откройте браузер. Добавьте Атомы. Соедините их. Ваша логика начинает работать мгновенно.
             </p>
-            <a href="demo.html" class="btn btn-primary" data-animate="fade-up" data-delay="200">Открыть страницу демо</a>
+            <a href="demo.ru.html" class="btn btn-primary" data-animate="fade-up" data-delay="200">Открыть страницу демо</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025--2026 <b>ATOMICA</b>. Built with <b>ALTAURI</b> Architecture. Contact <b>altauri.impulsys@gmail.com</b></p>
-        </div>
-    </footer>
+	<footer class="footer">
+		<div class="container">
+			<p class="footer-text" style="margin-top: 1.5rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+				ALTAURI представляет собой уникальную вычислительную среду, не имеющую прямых архитектурных аналогов на рынке. 
+				Мы открыты к сотрудничеству и приглашаем единомышленников присоединиться к развитию проекта. 
+				Мы ценим любую поддержку: обмен идеями, участие в разработке или инвестиционное партнерство. 
+				<br><br>
+				Если вы рассматриваете кастомную интеграцию системы под ваши задачи (включая White-label решения), 
+				создание проприетарных продуктов или стратегическое приобретение платформы, свяжитесь с нами: 
+				<a href="mailto:altauri.impulsys@gmail.com">altauri.impulsys@gmail.com</a>
+			</p>
+			
+			<p class="footer-copyright">&copy; 2025–2026 <b>ATOMICA</b>. Построен на архитектуре <b>ALTAURI</b></p>
+		</div>
+	</footer>
 
     <script src="js/main.js"></script>
 </body>
