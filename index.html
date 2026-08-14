@@ -201,10 +201,10 @@
                 </div>
                 <div class="split-visual" data-animate="fade-left">
 <pre class="ascii-art-block">┌──────────────┐          WebSocket           ┌─────────────────────────┐
-│   ALTAURI    │<---------------------------> │   ALTAURI               │
+│   ALTAURI    │<---------------------------->│   ALTAURI               │
 │  (Edge/RPI)  │          Atom-Atom           │    (Cloud/Server)       │
 │              │           protocol           │                         │
-│   [Sensor]───┼──►[WebSocket Out]            │  [WebSocket In]──►[DB]  │
+│   [Sensor]───┼──►[WebSocket Out]────────────┼─►[WebSocket In]──►[DB]  │
 │              │                              │                         │
 │   [Button]───┼──►[WebSocket Out]────────────┼─►[WebSocket In]──►[LED] │
 └──────────────┘                              └─────────────────────────┘</pre>
