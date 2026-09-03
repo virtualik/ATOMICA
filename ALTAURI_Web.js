@@ -5354,7 +5354,7 @@ ManifestResources.init = function(config) {
 		ManifestResources.rootPath = "./";
 	}
 	var bundle;
-	var data = "{\"name\":null,\"assets\":\"aoy4:pathy20:assets%2Ffavicon.icoy4:sizei4286y4:typey6:BINARYy2:idR1y7:preloadtgoR0y36:assets%2Ficons%2Fatoms%2Fcomport.pngR2i4680R3y5:IMAGER5R7R6tgoR0y32:assets%2Ficons%2Fatoms%2Ffft.pngR2i4517R3R8R5R9R6tgoR0R7R2i4680R3R8R5R7R6tgoR0R9R2i4517R3R8R5R9R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy32:assets%2Ficons%2Fatoms%2Ffft.pngy4:sizei4517y4:typey5:IMAGEy2:idR1y7:preloadtgoR0y36:assets%2Ficons%2Fatoms%2Fcomport.pngR2i4680R3R4R5R7R6tgoR0y20:assets%2Ffavicon.icoR2i4286R3y6:BINARYR5R8R6tgoR0R1R2i4517R3R4R5R1R6tgoR0R7R2i4680R3R4R5R7R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,ManifestResources.rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -49569,7 +49569,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 572864;
+	this.version = 586319;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
