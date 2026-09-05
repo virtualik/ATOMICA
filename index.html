@@ -331,25 +331,13 @@
         .nested-accordion .accordion-item.is-active {
             flex: 1 1 0%;   /* active demo takes remaining space inside nested-accordion */
         }
-        /* The flex chain from .nested-accordion down to .runtime-container must
-           not break: .accordion-content and .accordion-inner are the two links
-           that would otherwise stay content-sized and collapse the canvas to
-           a height of 0px. */
-        .nested-accordion .accordion-item.is-active .accordion-content {
-            display: flex;
-            flex-direction: column;
-        }
-        .nested-accordion .accordion-inner {
-            flex: 1 1 0%;
-            min-height: 0;
-        }
 
         /* ====================================================================
            RUNTIME CONTAINER (inside nested demo modules)
            ==================================================================== */
         .runtime-container {
             flex: 1 1 0%;
-            min-height: 240px;   /* floor for a usable demo canvas on short viewports */
+            min-height: 0;
             background: #1a1a2e;
             border-radius: var(--radius-md, 8px);
             overflow: hidden;
