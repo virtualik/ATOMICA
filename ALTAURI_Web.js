@@ -3645,6 +3645,11 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 			}
 		},1);
 		haxe_Timer.delay(function() {
+			if(_gthis._editorContext.currentEditor != null && !_gthis._editorContext.currentEditor.isDisposed) {
+				_gthis._editorContext.currentEditor.centerOnContent();
+			}
+		},500);
+		haxe_Timer.delay(function() {
 			if(!ui_DisplayConfig.getInstance().isDeviceMode()) {
 				_gthis.onToggleView();
 			}
@@ -3839,6 +3844,11 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 				_gthis._editorContext.currentEditor.centerOnContent();
 			}
 		},100);
+		haxe_Timer.delay(function() {
+			if(_gthis._editorContext.currentEditor != null) {
+				_gthis._editorContext.currentEditor.centerOnContent();
+			}
+		},450);
 		ui_DisplayConfig.getInstance().set_currentMode(ui_DisplayMode.EDITOR);
 		this.onToggleView();
 		this.updateNavigationUI();
@@ -4722,7 +4732,7 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 				(js_Boot.__cast(executing , system_commands_editor_RemovePortCommand)).adoptParentWires(bp,toRemove);
 			}
 			core_logic_Impulsys.quickEmit(core_logic_EventType.REDRAW_WIRES);
-			haxe_Log.trace("Removed " + toRemove.length + " external wires connected to port \"" + externalName + "\" of assembly " + asmId,{ fileName : "src/Main.hx", lineNumber : 2451, className : "Main", methodName : "onPortRemoved"});
+			haxe_Log.trace("Removed " + toRemove.length + " external wires connected to port \"" + externalName + "\" of assembly " + asmId,{ fileName : "src/Main.hx", lineNumber : 2469, className : "Main", methodName : "onPortRemoved"});
 		}
 	}
 	,endpointHitsDeletedPort: function(point,parentAssembly,asmId,childBlueprintId,externalName) {
@@ -4909,8 +4919,8 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 		}
 		var nodeCount = this._editorContext.currentEditor.getSelectedNodeCount();
 		var wireIds = this._editorContext.currentEditor.getSelectedWireIds();
-		haxe_Log.trace("DEBUG: nodeCount=" + nodeCount + ", wireIds.length=" + wireIds.length,{ fileName : "src/Main.hx", lineNumber : 2686, className : "Main", methodName : "deleteSelectedOnCanvas"});
-		haxe_Log.trace("DEBUG: selectedNodeIds=" + Std.string(this._editorContext.currentEditor.getSelectedNodeIds()),{ fileName : "src/Main.hx", lineNumber : 2687, className : "Main", methodName : "deleteSelectedOnCanvas"});
+		haxe_Log.trace("DEBUG: nodeCount=" + nodeCount + ", wireIds.length=" + wireIds.length,{ fileName : "src/Main.hx", lineNumber : 2704, className : "Main", methodName : "deleteSelectedOnCanvas"});
+		haxe_Log.trace("DEBUG: selectedNodeIds=" + Std.string(this._editorContext.currentEditor.getSelectedNodeIds()),{ fileName : "src/Main.hx", lineNumber : 2705, className : "Main", methodName : "deleteSelectedOnCanvas"});
 		if(nodeCount > 0) {
 			this._editorContext.currentEditor.deleteSelectedNodes();
 			this.updateSettingsStats();
@@ -18982,12 +18992,12 @@ editor_NodeEditor.prototype = $extend(openfl_display_Sprite.prototype,{
 			modeToRestore = visualModeStr;
 			haxe_Log.trace("createViewForAtom: using visualModeStr from AtomDef = \"" + modeToRestore + "\"",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 1094, className : "editor.NodeEditor", methodName : "createViewForAtom"});
 		}
-		if(modeToRestore != null && modeToRestore != "MEDIUM") {
+		if(modeToRestore != null) {
 			haxe_Log.trace("createViewForAtom: applying visualMode \"" + modeToRestore + "\" to view",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 1102, className : "editor.NodeEditor", methodName : "createViewForAtom"});
 			view.setVisualModeFromString(modeToRestore);
 		} else {
-			haxe_Log.trace("createViewForAtom: using default MEDIUM mode",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 1107, className : "editor.NodeEditor", methodName : "createViewForAtom"});
-			view.setVisualMode(ui_NodeVisualMode.MEDIUM);
+			haxe_Log.trace("createViewForAtom: using default HEAVY mode",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 1107, className : "editor.NodeEditor", methodName : "createViewForAtom"});
+			view.setVisualMode(ui_NodeVisualMode.HEAVY);
 		}
 		this._canvas.addChild(view);
 		this._nodes.h[id] = view;
@@ -19582,56 +19592,6 @@ editor_NodeEditor.prototype = $extend(openfl_display_Sprite.prototype,{
 			var nodeMinY = y;
 			var nodeMaxX = x + size.width;
 			var nodeMaxY = y + size.height;
-			var h = view.inputPorts.h;
-			var port_h = h;
-			var port_keys = Object.keys(h);
-			var port_length = port_keys.length;
-			var port_current = 0;
-			while(port_current < port_length) {
-				var port = port_h[port_keys[port_current++]];
-				if(port == null) {
-					continue;
-				}
-				var globalPos = port.localToGlobal(new openfl_geom_Point(0,0));
-				var localPos = this._canvas.globalToLocal(globalPos);
-				if(localPos.x < nodeMinX) {
-					nodeMinX = localPos.x;
-				}
-				if(localPos.y < nodeMinY) {
-					nodeMinY = localPos.y;
-				}
-				if(localPos.x > nodeMaxX) {
-					nodeMaxX = localPos.x;
-				}
-				if(localPos.y > nodeMaxY) {
-					nodeMaxY = localPos.y;
-				}
-			}
-			var h1 = view.outputPorts.h;
-			var port_h1 = h1;
-			var port_keys1 = Object.keys(h1);
-			var port_length1 = port_keys1.length;
-			var port_current1 = 0;
-			while(port_current1 < port_length1) {
-				var port1 = port_h1[port_keys1[port_current1++]];
-				if(port1 == null) {
-					continue;
-				}
-				var globalPos1 = port1.localToGlobal(new openfl_geom_Point(0,0));
-				var localPos1 = this._canvas.globalToLocal(globalPos1);
-				if(localPos1.x < nodeMinX) {
-					nodeMinX = localPos1.x;
-				}
-				if(localPos1.y < nodeMinY) {
-					nodeMinY = localPos1.y;
-				}
-				if(localPos1.x > nodeMaxX) {
-					nodeMaxX = localPos1.x;
-				}
-				if(localPos1.y > nodeMaxY) {
-					nodeMaxY = localPos1.y;
-				}
-			}
 			if(!hasNodes) {
 				minX = nodeMinX;
 				minY = nodeMinY;
@@ -19655,7 +19615,8 @@ editor_NodeEditor.prototype = $extend(openfl_display_Sprite.prototype,{
 		}
 		if(this._frame != null) {
 			var frameBounds = this._frame.getBounds(this._canvas);
-			if(frameBounds != null && frameBounds.width > 0 && frameBounds.height > 0) {
+			var frameIsSane = frameBounds != null && frameBounds.width > 0 && frameBounds.height > 0 && (!hasNodes || frameBounds.width <= (maxX - minX) * 1.4 + 100 && frameBounds.height <= (maxY - minY) * 1.4 + 100);
+			if(frameIsSane) {
 				if(!hasNodes) {
 					minX = frameBounds.x;
 					minY = frameBounds.y;
@@ -19714,7 +19675,7 @@ editor_NodeEditor.prototype = $extend(openfl_display_Sprite.prototype,{
 		this._canvas.set_y(targetY);
 		this._wireRenderer.rebuildAll();
 		this.updateVisibility();
-		haxe_Log.trace("NodeEditor: Auto-centered on content (zoom=" + zoom + ")",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 2084, className : "editor.NodeEditor", methodName : "centerOnContent"});
+		haxe_Log.trace("NodeEditor: Auto-centered on content (zoom=" + zoom + ")",{ fileName : "src/editor/NodeEditor.hx", lineNumber : 2075, className : "editor.NodeEditor", methodName : "centerOnContent"});
 	}
 	,deleteSelectedNodes: function() {
 		var ids = this._selection.getSelectedNodeIds();
@@ -19976,7 +19937,7 @@ var editor_NodeView = function(atom,nodeId) {
 	this._parentAssembly = null;
 	this._isEditingName = false;
 	this._nameInput = null;
-	this.visualMode = ui_NodeVisualMode.LIGHT;
+	this.visualMode = ui_NodeVisualMode.HEAVY;
 	this.hasWidget = false;
 	this.selected = false;
 	this._inlineEditors = new haxe_ds_StringMap();
@@ -49569,7 +49530,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 363023;
+	this.version = 410632;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -110239,7 +110200,7 @@ var ui_SettingsPanel = function() {
 	this._wireButtons = [];
 	this.onSettingsChanged = null;
 	this._visualModeButtons = [];
-	this._nodeVisualMode = ui_NodeVisualMode.MEDIUM;
+	this._nodeVisualMode = ui_NodeVisualMode.HEAVY;
 	this._contextMenuRadioButtons = [];
 	this._contextMenuSidebarPosition = ui_contextmenu_SidebarPosition.LEFT;
 	this._allowAssembly = true;
