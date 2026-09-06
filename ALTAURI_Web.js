@@ -3481,7 +3481,13 @@ var Main = function() {
 	openfl_display_Sprite.call(this);
 	utils_Trap.boot();
 	this._theme = editor_EditorTheme.getInstance();
-	var canvas = window.document.getElementById("openfl-content");
+	var canvas = null;
+	if(openfl_Lib.get_current() != null && openfl_Lib.get_current().stage != null) {
+		canvas = openfl_Lib.get_current().stage.__canvas;
+	}
+	if(canvas == null) {
+		canvas = window.document.getElementById("openfl-content");
+	}
 	if(canvas == null) {
 		canvas = window.document.querySelector("canvas");
 	}
@@ -3510,7 +3516,13 @@ Main.__super__ = openfl_display_Sprite;
 Main.prototype = $extend(openfl_display_Sprite.prototype,{
 	init: function(e) {
 		var _gthis = this;
-		var canvas = window.document.getElementById("openfl-content");
+		var canvas = null;
+		if(openfl_Lib.get_current() != null && openfl_Lib.get_current().stage != null) {
+			canvas = openfl_Lib.get_current().stage.__canvas;
+		}
+		if(canvas == null) {
+			canvas = window.document.getElementById("openfl-content");
+		}
 		if(canvas == null) {
 			canvas = window.document.querySelector("canvas");
 		}
@@ -3532,7 +3544,13 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 				}
 			});
 		}
-		var canvas = window.document.getElementById("openfl-content");
+		var canvas = null;
+		if(openfl_Lib.get_current() != null && openfl_Lib.get_current().stage != null) {
+			canvas = openfl_Lib.get_current().stage.__canvas;
+		}
+		if(canvas == null) {
+			canvas = window.document.getElementById("openfl-content");
+		}
 		if(canvas == null) {
 			canvas = window.document.querySelector("canvas");
 		}
@@ -3622,7 +3640,7 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 		editor.connectAtoms(closeFileButtonId,"out",fileWriterId,"close");
 		editor.connectAtoms(comport1AtomId,"rxData",fileWriterId,"append");
 		editor.connectAtoms(fileWriterId,"isOpen",fileWriterStatusLedId,"in");
-		haxe_Log.trace("MainHTML5: Demo project created with 2 atoms and 1 connection",{ fileName : "src/Main.hx", lineNumber : 528, className : "Main", methodName : "createDemoProject"});
+		haxe_Log.trace("MainHTML5: Demo project created with 2 atoms and 1 connection",{ fileName : "src/Main.hx", lineNumber : 546, className : "Main", methodName : "createDemoProject"});
 		this.renameAtom(rootAssembly,openPortButtonId,"Open Port");
 		this.renameAtom(rootAssembly,closePortButtonId,"Close Port");
 		this.renameAtom(rootAssembly,sendTxDataButtonId,"Send TX");
@@ -4732,7 +4750,7 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 				(js_Boot.__cast(executing , system_commands_editor_RemovePortCommand)).adoptParentWires(bp,toRemove);
 			}
 			core_logic_Impulsys.quickEmit(core_logic_EventType.REDRAW_WIRES);
-			haxe_Log.trace("Removed " + toRemove.length + " external wires connected to port \"" + externalName + "\" of assembly " + asmId,{ fileName : "src/Main.hx", lineNumber : 2469, className : "Main", methodName : "onPortRemoved"});
+			haxe_Log.trace("Removed " + toRemove.length + " external wires connected to port \"" + externalName + "\" of assembly " + asmId,{ fileName : "src/Main.hx", lineNumber : 2487, className : "Main", methodName : "onPortRemoved"});
 		}
 	}
 	,endpointHitsDeletedPort: function(point,parentAssembly,asmId,childBlueprintId,externalName) {
@@ -4919,8 +4937,8 @@ Main.prototype = $extend(openfl_display_Sprite.prototype,{
 		}
 		var nodeCount = this._editorContext.currentEditor.getSelectedNodeCount();
 		var wireIds = this._editorContext.currentEditor.getSelectedWireIds();
-		haxe_Log.trace("DEBUG: nodeCount=" + nodeCount + ", wireIds.length=" + wireIds.length,{ fileName : "src/Main.hx", lineNumber : 2704, className : "Main", methodName : "deleteSelectedOnCanvas"});
-		haxe_Log.trace("DEBUG: selectedNodeIds=" + Std.string(this._editorContext.currentEditor.getSelectedNodeIds()),{ fileName : "src/Main.hx", lineNumber : 2705, className : "Main", methodName : "deleteSelectedOnCanvas"});
+		haxe_Log.trace("DEBUG: nodeCount=" + nodeCount + ", wireIds.length=" + wireIds.length,{ fileName : "src/Main.hx", lineNumber : 2722, className : "Main", methodName : "deleteSelectedOnCanvas"});
+		haxe_Log.trace("DEBUG: selectedNodeIds=" + Std.string(this._editorContext.currentEditor.getSelectedNodeIds()),{ fileName : "src/Main.hx", lineNumber : 2723, className : "Main", methodName : "deleteSelectedOnCanvas"});
 		if(nodeCount > 0) {
 			this._editorContext.currentEditor.deleteSelectedNodes();
 			this.updateSettingsStats();
@@ -6812,7 +6830,6 @@ core_base_Assembly.prototype = $extend(core_base_Atom.prototype,{
 					var contact = allContacts[_g];
 					++_g;
 					if(contact != null && !contact.isDisposed && contact.hasLink(internalContact)) {
-						haxe_Log.trace("Удаляем связь: " + contact.name + " <-> " + internalContact.name,{ fileName : "src/core/base/Assembly.hx", lineNumber : 1026, className : "core.base.Assembly", methodName : "_clearInternalPortLinks"});
 						contact.unlink(internalContact);
 					}
 				}
@@ -27435,7 +27452,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 				this._readPos = this._writePos - this._bufferSize;
 				this._overflowCount++;
 				if(this._overflowCount % 100 == 0) {
-					haxe_Log.trace("ComPortAtom: Ring buffer overflow! Lost " + this._overflowCount + " bytes total",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 1187, className : "library.drivers.ComPortAtom", methodName : "writeToBuffer"});
+					haxe_Log.trace("ComPortAtom: Ring buffer overflow! Lost " + this._overflowCount + " bytes total",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2362, className : "library.drivers.ComPortAtom", methodName : "writeToBuffer"});
 				}
 			}
 		}
@@ -27536,7 +27553,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 			this._hasPendingErr = false;
 			if(this._pendingErrStr.indexOf("disconnected") >= 0) {
 				if(this._isOpenFlag) {
-					haxe_Log.trace("ComPortAtom: USB cable unplugged. Forcing closeDevice()...",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 1365, className : "library.drivers.ComPortAtom", methodName : "update"});
+					haxe_Log.trace("ComPortAtom: USB cable unplugged. Forcing closeDevice()...",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2713, className : "library.drivers.ComPortAtom", methodName : "update"});
 					this.closeDevice();
 					this._selectedVid = 0;
 					this._selectedPid = 0;
@@ -27555,7 +27572,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 				}
 				core_logic_Impulsys.quickEmit(core_logic_EventType.COMPORT_ERROR,{ atomId : this.get_id(), text : this._pendingErrStr});
 				if(this._isOpenFlag) {
-					haxe_Log.trace("ComPortAtom: Port error detected. Forcing closeDevice()...",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 1380, className : "library.drivers.ComPortAtom", methodName : "update"});
+					haxe_Log.trace("ComPortAtom: Port error detected. Forcing closeDevice()...",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2742, className : "library.drivers.ComPortAtom", methodName : "update"});
 					this.closeDevice();
 					this._selectedVid = 0;
 					this._selectedPid = 0;
@@ -27659,7 +27676,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 		if(bufSizeC != null && bufSizeC.get_value() != null) {
 			var newSize = bufSizeC.get_value();
 			if(newSize >= 256 && newSize <= 65536 && newSize != this._bufferSize) {
-				haxe_Log.trace("ComPortAtom: Buffer size changed from " + this._bufferSize + " to " + newSize,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 1468, className : "library.drivers.ComPortAtom", methodName : "readConfiguration"});
+				haxe_Log.trace("ComPortAtom: Buffer size changed from " + this._bufferSize + " to " + newSize,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2918, className : "library.drivers.ComPortAtom", methodName : "readConfiguration"});
 				this.initRingBuffer(newSize);
 			}
 		}
@@ -27758,7 +27775,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 	,setError: function(msg) {
 		this._pendingErrStr = msg;
 		this._hasPendingErr = true;
-		haxe_Log.trace("ComPortAtom ERROR: " + msg,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 1557, className : "library.drivers.ComPortAtom", methodName : "setError"});
+		haxe_Log.trace("ComPortAtom ERROR: " + msg,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 3096, className : "library.drivers.ComPortAtom", methodName : "setError"});
 		core_logic_Impulsys.quickEmit(core_logic_EventType.COMPORT_ERROR,{ atomId : this.get_id(), text : msg});
 	}
 	,openDevice: function() {
@@ -27955,7 +27972,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 			return;
 		}
 		if(this._connectionType == "serial") {
-			haxe_Log.trace("ComPortAtom: DTR control not directly supported in standard Web Serial API without extensions.",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2168, className : "library.drivers.ComPortAtom", methodName : "setDTRState"});
+			haxe_Log.trace("ComPortAtom: DTR control not directly supported in standard Web Serial API without extensions.",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 4315, className : "library.drivers.ComPortAtom", methodName : "setDTRState"});
 		} else if(this._connectionType == "usb") {
 			var vid = this._usbDevice.vendorId;
 			var val = state ? 3 : 0;
@@ -27976,7 +27993,7 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 		if(outOpen != null) {
 			outOpen.set_value(false);
 		}
-		haxe_Log.trace("ComPortAtom: Port closed",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2200, className : "library.drivers.ComPortAtom", methodName : "onPortClosed"});
+		haxe_Log.trace("ComPortAtom: Port closed",{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 4379, className : "library.drivers.ComPortAtom", methodName : "onPortClosed"});
 	}
 	,onPortCloseError: function(err) {
 		this.setError("Failed to close port: " + Std.string(err));
@@ -28206,13 +28223,13 @@ library_drivers_ComPortAtom.prototype = $extend(core_base_Atom.prototype,{
 		} else if(this._connectionType == "usb") {
 			this.startUsbReadLoop();
 		}
-		haxe_Log.trace("ComPortAtom: Port opened via " + this._connectionType,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2455, className : "library.drivers.ComPortAtom", methodName : "onPortOpened"});
+		haxe_Log.trace("ComPortAtom: Port opened via " + this._connectionType,{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 4889, className : "library.drivers.ComPortAtom", methodName : "onPortOpened"});
 	}
 	,onPortOpenError: function(err) {
 		this.setError("Failed to open port: " + Std.string(err));
 	}
 	,onPortRequestError: function(err) {
-		haxe_Log.trace("ComPortAtom: Port request cancelled or failed: " + Std.string(err),{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 2462, className : "library.drivers.ComPortAtom", methodName : "onPortRequestError"});
+		haxe_Log.trace("ComPortAtom: Port request cancelled or failed: " + Std.string(err),{ fileName : "src/library/drivers/ComPortAtom.hx", lineNumber : 4903, className : "library.drivers.ComPortAtom", methodName : "onPortRequestError"});
 	}
 	,startSerialReadLoop: function() {
 		this._isReading = true;
@@ -28369,7 +28386,7 @@ library_drivers_DataStorageAtom.__interfaces__ = [system_managers_Driver];
 library_drivers_DataStorageAtom.__super__ = core_base_Atom;
 library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 	init: function() {
-		haxe_Log.trace("DataStorageAtom: Initialized (Main Thread)",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 112, className : "library.drivers.DataStorageAtom", methodName : "init"});
+		haxe_Log.trace("DataStorageAtom: Initialized (Main Thread)",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 186, className : "library.drivers.DataStorageAtom", methodName : "init"});
 		system_managers_DriverManager.getInstance().register(this);
 	}
 	,update: function(dt) {
@@ -28409,7 +28426,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 			this._kind = asBytes ? "binary" : "text";
 		} else if(typeof(portion) == "string") {
 			if(asBytes) {
-				haxe_Log.trace("DataStorageAtom: String portion in bytes mode — converting to UTF-8 bytes",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 181, className : "library.drivers.DataStorageAtom", methodName : "storePortion"});
+				haxe_Log.trace("DataStorageAtom: String portion in bytes mode — converting to UTF-8 bytes",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 310, className : "library.drivers.DataStorageAtom", methodName : "storePortion"});
 			}
 			this._buffer = haxe_io_Bytes.ofString(portion);
 			this._kind = asBytes ? "binary" : "text";
@@ -28418,7 +28435,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 			if(s == "") {
 				return;
 			}
-			haxe_Log.trace("DataStorageAtom: non-string portion (" + Std.string(portion) + ") — stored as text",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 191, className : "library.drivers.DataStorageAtom", methodName : "storePortion"});
+			haxe_Log.trace("DataStorageAtom: non-string portion (" + Std.string(portion) + ") — stored as text",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 329, className : "library.drivers.DataStorageAtom", methodName : "storePortion"});
 			this._buffer = haxe_io_Bytes.ofString(s);
 			this._kind = "text";
 		}
@@ -28429,7 +28446,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 		this._storeCount++;
 		this.pushStatus(false);
 		this.pulseStored();
-		haxe_Log.trace("DataStorageAtom: stored " + this._buffer.length + " bytes (kind=" + this._kind + ", stores=" + this._storeCount + ")",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 206, className : "library.drivers.DataStorageAtom", methodName : "acceptPortion"});
+		haxe_Log.trace("DataStorageAtom: stored " + this._buffer.length + " bytes (kind=" + this._kind + ", stores=" + this._storeCount + ")",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 357, className : "library.drivers.DataStorageAtom", methodName : "acceptPortion"});
 	}
 	,emitContents: function() {
 		if(this._buffer == null || this._buffer.length == 0) {
@@ -28468,7 +28485,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 			bytesOut.propagateCurrentValue();
 		}
 		this.pushStatus(false);
-		haxe_Log.trace("DataStorageAtom: buffer cleared",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 257, className : "library.drivers.DataStorageAtom", methodName : "clearBuffer"});
+		haxe_Log.trace("DataStorageAtom: buffer cleared",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 452, className : "library.drivers.DataStorageAtom", methodName : "clearBuffer"});
 	}
 	,readInputs: function() {
 		if(this._isDisposed) {
@@ -28492,7 +28509,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 				if(this._enabled) {
 					this.storePortion(portion);
 				} else {
-					haxe_Log.trace("DataStorageAtom: gate closed — portion passed by",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 300, className : "library.drivers.DataStorageAtom", methodName : "readInputs"});
+					haxe_Log.trace("DataStorageAtom: gate closed — portion passed by",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 532, className : "library.drivers.DataStorageAtom", methodName : "readInputs"});
 				}
 			}
 		}
@@ -28535,7 +28552,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 			errorTickOut.set_value(true);
 			this._errorTimer = 0.05;
 		}
-		haxe_Log.trace("DataStorageAtom ERROR: " + msg,{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 355, className : "library.drivers.DataStorageAtom", methodName : "setError"});
+		haxe_Log.trace("DataStorageAtom ERROR: " + msg,{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 637, className : "library.drivers.DataStorageAtom", methodName : "setError"});
 	}
 	,pulseStored: function() {
 		if(this._isDisposed) {
@@ -28640,7 +28657,7 @@ library_drivers_DataStorageAtom.prototype = $extend(core_base_Atom.prototype,{
 			this.setError("payload was truncated on export — data not restored");
 		}
 		this.pushStatus(true);
-		haxe_Log.trace("DataStorageAtom: state restored (kind=" + this._kind + ", size=" + (this._buffer != null ? this._buffer.length : 0) + ")",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 487, className : "library.drivers.DataStorageAtom", methodName : "restoreState"});
+		haxe_Log.trace("DataStorageAtom: state restored (kind=" + this._kind + ", size=" + (this._buffer != null ? this._buffer.length : 0) + ")",{ fileName : "src/library/drivers/DataStorageAtom.hx", lineNumber : 894, className : "library.drivers.DataStorageAtom", methodName : "restoreState"});
 	}
 	,hasData: function() {
 		if(this._buffer != null) {
@@ -28688,7 +28705,7 @@ library_drivers_FileReaderAtom.__interfaces__ = [system_managers_Driver];
 library_drivers_FileReaderAtom.__super__ = core_base_Atom;
 library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 	init: function() {
-		haxe_Log.trace("FileReaderAtom: Initialized (Main Thread)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 109, className : "library.drivers.FileReaderAtom", methodName : "init"});
+		haxe_Log.trace("FileReaderAtom: Initialized (Main Thread)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 184, className : "library.drivers.FileReaderAtom", methodName : "init"});
 		system_managers_DriverManager.getInstance().register(this);
 	}
 	,update: function(dt) {
@@ -28749,26 +28766,43 @@ library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 	,initLegacyInput: function() {
 		var self = this;
 		
+
             var input = document.createElement('input');
+
             input.type = 'file';
+
             input.onchange = function(e) {
+
                 if (input.files && input.files.length > 0) {
+
                     var f = input.files[0];
+
                     var reader = new FileReader();
+
                     reader.onload = function(ev) {
+
                         var buf = ev.target.result;
+
                         var text = new TextDecoder('utf-8').decode(buf);
+
                         (function(text,buf,size,name) {
 			self.onLoadComplete(text,haxe_io_Bytes.ofData(buf),size,name);
 		})(text, buf, f.size, f.name);
+
                     };
+
                     reader.onerror = function(ev) { (function(msg) {
 			self.setError(msg);
 		})('Legacy read error'); };
+
                     reader.readAsArrayBuffer(f);
+
                 }
+
             };
+
             input.click();
+
         ;
 	}
 	,onPickerCancelled: function(err) {
@@ -28776,7 +28810,7 @@ library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 			return;
 		}
 		this._pendingOpen = false;
-		haxe_Log.trace("FileReaderAtom: File picker cancelled",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 260, className : "library.drivers.FileReaderAtom", methodName : "onPickerCancelled"});
+		haxe_Log.trace("FileReaderAtom: File picker cancelled",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 474, className : "library.drivers.FileReaderAtom", methodName : "onPickerCancelled"});
 	}
 	,onLoadComplete: function(text,raw,size,name) {
 		if(this._isDisposed) {
@@ -28786,7 +28820,7 @@ library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 		this._readCount++;
 		this.updateOutputs(text,raw,name,size);
 		this.pulseRead();
-		haxe_Log.trace("FileReaderAtom: Loaded (" + size + " bytes)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 271, className : "library.drivers.FileReaderAtom", methodName : "onLoadComplete"});
+		haxe_Log.trace("FileReaderAtom: Loaded (" + size + " bytes)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 495, className : "library.drivers.FileReaderAtom", methodName : "onLoadComplete"});
 	}
 	,rereadFile: function() {
 		if(this._isDisposed) {
@@ -28807,7 +28841,7 @@ library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 		}
 		this._isOpenFlag = false;
 		this.updateOutputs("",null,"",0);
-		haxe_Log.trace("FileReaderAtom: File closed (data unloaded, path retained)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 343, className : "library.drivers.FileReaderAtom", methodName : "closeFile"});
+		haxe_Log.trace("FileReaderAtom: File closed (data unloaded, path retained)",{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 631, className : "library.drivers.FileReaderAtom", methodName : "closeFile"});
 	}
 	,readInputs: function() {
 		if(this._isDisposed) {
@@ -28895,7 +28929,7 @@ library_drivers_FileReaderAtom.prototype = $extend(core_base_Atom.prototype,{
 			errorTickOut.set_value(true);
 			this._errorTimer = 0.05;
 		}
-		haxe_Log.trace("FileReaderAtom ERROR: " + msg,{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 433, className : "library.drivers.FileReaderAtom", methodName : "setError"});
+		haxe_Log.trace("FileReaderAtom ERROR: " + msg,{ fileName : "src/library/drivers/FileReaderAtom.hx", lineNumber : 809, className : "library.drivers.FileReaderAtom", methodName : "setError"});
 	}
 	,updatePulseTimers: function(dt) {
 		if(this._isDisposed) {
@@ -30359,7 +30393,7 @@ library_drivers_WebSocketAtom.__interfaces__ = [system_managers_Driver];
 library_drivers_WebSocketAtom.__super__ = core_base_Atom;
 library_drivers_WebSocketAtom.prototype = $extend(core_base_Atom.prototype,{
 	init: function() {
-		haxe_Log.trace("WebSocketAtom: HTML5 mode initialized (native WebSocket API)",{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 1262, className : "library.drivers.WebSocketAtom", methodName : "init"});
+		haxe_Log.trace("WebSocketAtom: HTML5 mode initialized (native WebSocket API)",{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 2515, className : "library.drivers.WebSocketAtom", methodName : "init"});
 	}
 	,update: function(dt) {
 		if(this._isDisposed) {
@@ -30593,7 +30627,7 @@ library_drivers_WebSocketAtom.prototype = $extend(core_base_Atom.prototype,{
 			this._webSocket.onopen = function(e) {
 				_gthis._isConnectedFlag = true;
 				_gthis._lastError = "";
-				haxe_Log.trace("WebSocketAtom: Connected to " + _gthis._lastUrl,{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 1964, className : "library.drivers.WebSocketAtom", methodName : "connectWebSocket"});
+				haxe_Log.trace("WebSocketAtom: Connected to " + _gthis._lastUrl,{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 3919, className : "library.drivers.WebSocketAtom", methodName : "connectWebSocket"});
 			};
 			this._webSocket.onmessage = function(e) {
 				if(e.data == null) {
@@ -30630,7 +30664,7 @@ library_drivers_WebSocketAtom.prototype = $extend(core_base_Atom.prototype,{
 				if(e.code != 1000 && e.code != 1001) {
 					_gthis.setError("WebSocket closed (code " + e.code + (e.reason != "" ? ": " + e.reason : "") + ")");
 				}
-				haxe_Log.trace("WebSocketAtom: Connection closed (code " + e.code + ")",{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 2012, className : "library.drivers.WebSocketAtom", methodName : "connectWebSocket"});
+				haxe_Log.trace("WebSocketAtom: Connection closed (code " + e.code + ")",{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 4015, className : "library.drivers.WebSocketAtom", methodName : "connectWebSocket"});
 			};
 		} catch( _g ) {
 			haxe_NativeStackTrace.lastError = _g;
@@ -30682,7 +30716,7 @@ library_drivers_WebSocketAtom.prototype = $extend(core_base_Atom.prototype,{
 		this._pendingErrStr = msg;
 		this._hasPendingError = true;
 		this._lastError = msg;
-		haxe_Log.trace("WebSocketAtom ERROR: " + msg,{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 2095, className : "library.drivers.WebSocketAtom", methodName : "setError"});
+		haxe_Log.trace("WebSocketAtom ERROR: " + msg,{ fileName : "src/library/drivers/WebSocketAtom.hx", lineNumber : 4181, className : "library.drivers.WebSocketAtom", methodName : "setError"});
 	}
 	,updatePulseTimers: function(dt) {
 		if(this._receivedTimer > 0) {
@@ -31589,7 +31623,9 @@ library_electro_PassThroughAtom.prototype = $extend(core_base_Atom.prototype,{
 var library_electro_RelayAtom = function(id) {
 	this._controlValue = false;
 	this._signalValue = null;
-	core_base_Atom.call(this,[new core_base_Contact(null,core_types_ContactType.INPUT,"signal"),new core_base_Contact(false,core_types_ContactType.INPUT,"control")],[new core_base_Contact(null,core_types_ContactType.OUTPUT,"out")],null,id,"Relay");
+	core_base_Atom.call(this,[new core_base_Contact(null,core_types_ContactType.INPUT,"signal"),new core_base_Contact(false,core_types_ContactType.INPUT,"control")],[new core_base_Contact(null,core_types_ContactType.OUTPUT,"out")],function(_inputs) {
+		return [];
+	},id,"Relay");
 };
 $hxClasses["library.electro.RelayAtom"] = library_electro_RelayAtom;
 library_electro_RelayAtom.__name__ = "library.electro.RelayAtom";
@@ -49530,7 +49566,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 131938;
+	this.version = 527208;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
